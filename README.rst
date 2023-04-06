@@ -1,15 +1,18 @@
-===========
 trame-xterm
-===========
+===========================================================
 
-Trame widget to expose xterm.js
-
-
-* Free software: MIT License
+Trame widget to expose xterm.js. This library is compatible with both vue2 and vue3.
 
 
-Installing
-----------
+License
+-----------------------------------------------------------
+
+This library is distributed under the MIT License (Same as xterm.js)
+
+
+Development
+-----------------------------------------------------------
+
 Build and install the Vue components
 
 .. code-block:: console
@@ -19,15 +22,8 @@ Build and install the Vue components
     npm run build
     cd -
 
-Install the application
+Install the python library
 
 .. code-block:: console
 
     pip install -e .
-
-
-
-Features
---------
-
-* TODO
