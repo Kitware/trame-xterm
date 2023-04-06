@@ -26,8 +26,11 @@ async def create_process():
 
     prepare_for_input()
 
-    # await PROC.wait()
-    # print("Process is done...")
+    await PROC.wait()
+    print("Process is done...")
+
+
+ctrl.start_process.add_task(create_process)
 
 
 async def handle_stdout(process):
@@ -36,20 +39,12 @@ async def handle_stdout(process):
         data = data.decode("utf-8").replace("\n", "\n\r")
         ctrl.write(data)
 
-    ctrl.writeln()
-
-    prepare_for_input()
-
 
 async def handle_stderr(process):
     async for data in process.stderr:
         # Adding a '\r' is giving us the right spacing
         data = data.decode("utf-8").replace("\n", "\n\r")
         ctrl.write(data)
-
-    ctrl.writeln()
-
-    prepare_for_input()
 
 
 async def on_input(data):
@@ -63,14 +58,14 @@ async def on_input(data):
 
 
 def prepare_for_input():
-    ctrl.write(">>> ")
+    ctrl.write("$ ")
 
 
 with SinglePageLayout(server) as layout:
     layout.title.set_text("Read-Only XTerm")
     with layout.toolbar:
         vuetify.VSpacer()
-        vuetify.VBtn("Bash", classes="mx-1", click=create_process)
+        vuetify.VBtn("Bash", classes="mx-1", click=ctrl.start_process)
         vuetify.VDivider(vertical=True)
         vuetify.VBtn("Clear", classes="mx-1", click=ctrl.clear)
         vuetify.VBtn("Reset", classes="mx-1", click=ctrl.reset)

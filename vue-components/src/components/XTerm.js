@@ -29,6 +29,10 @@ export default {
     },
   },
   emits: [
+    // lifecycle
+    "opened",
+    "disposed",
+    // xterm.js
     "bell",
     "binary",
     "cursorMove",
@@ -154,11 +158,13 @@ export default {
     onMounted(() => {
       term.open(elem.value);
       sizeObserver.observe(elem.value);
+      emit("opened");
     });
 
     onBeforeUnmount(() => {
       sizeObserver.unobserve(elem.value);
       term.dispose();
+      emit("disposed");
     });
 
     expose(methods);
