@@ -24,24 +24,46 @@ async def create_process():
     asynchronous.create_task(handle_stdout(PROC))
     asynchronous.create_task(handle_stderr(PROC))
 
-    await PROC.wait()
-    print("Process is done...")
+    prepare_for_input()
+
+    # await PROC.wait()
+    # print("Process is done...")
 
 
 async def handle_stdout(process):
     async for data in process.stdout:
-        print("out", data)
+        # Adding a '\r' is giving us the right spacing
+        data = data.decode("utf-8").replace("\n", "\n\r")
         ctrl.write(data)
+
+    ctrl.writeln()
+
+    prepare_for_input()
 
 
 async def handle_stderr(process):
     async for data in process.stderr:
-        print("err", data)
+        # Adding a '\r' is giving us the right spacing
+        data = data.decode("utf-8").replace("\n", "\n\r")
+        ctrl.write(data)
+
+    ctrl.writeln()
+
+    prepare_for_input()
 
 
 async def on_input(data):
-    PROC.stdin.write(bytes(data, "utf-8"))
+    ctrl.write(data)
+    if "\r" in data:
+        ctrl.writeln()
+
+    data = data.replace("\r", "\n")
+    PROC.stdin.write(data.encode("utf-8"))
     await PROC.stdin.drain()
+
+
+def prepare_for_input():
+    ctrl.write(">>> ")
 
 
 with SinglePageLayout(server) as layout:
