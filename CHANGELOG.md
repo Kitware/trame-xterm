@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.2 (2023-04-12)
+### Fix
+* **api:** Add fit method ([`b41461c`](https://github.com/Kitware/trame-xterm/commit/b41461ce2d330558b27f083db027ce11e3d7c211))
+
 ## v0.1.1 (2023-04-06)
 ### Fix
 * **emit:** Add opened/disposed life cycles ([`649a849`](https://github.com/Kitware/trame-xterm/commit/649a849a49ffa5cfe764db13f9634f0d7864c3f4))
