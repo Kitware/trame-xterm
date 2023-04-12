@@ -80,6 +80,10 @@ class XTerm(HtmlElement):
             "titleChange",
         ]
 
+    def fit(self):
+        """Trigger a fit on the available space"""
+        self.server.js_call(self.__ref, "fit")
+
     def blur(self):
         """Trigger a blur on the xterm.js widget"""
         self.server.js_call(self.__ref, "blur")

@@ -50,9 +50,12 @@ export default {
     const elem = ref(null);
     const term = new Terminal(props.options);
     const fitAddon = new FitAddon();
-    const sizeObserver = new ResizeObserver(() => {
+
+    function fit() {
       fitAddon.fit();
-    });
+    }
+
+    const sizeObserver = new ResizeObserver(fit);
     term.loadAddon(fitAddon);
 
     // Events
@@ -74,6 +77,7 @@ export default {
 
     // Methods
     const methods = {
+      fit,
       // Skipped: open, dispose, loadAddon, +Experimental
       blur() {
         return term.blur();
