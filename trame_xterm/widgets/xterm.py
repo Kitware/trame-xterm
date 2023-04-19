@@ -1,5 +1,7 @@
+import json
 from termcolor import colored
 from trame_client.widgets.core import AbstractElement
+from ..utils.terminal import Terminal
 
 from .. import module
 
@@ -17,9 +19,13 @@ class HtmlElement(AbstractElement):
 class XTerm(HtmlElement):
     _next_id = 0
 
-    def __init__(self, **kwargs):
+    def __init__(self, shell=None, **kwargs):
         """
         Create an XTerm element
+
+        Argument:
+
+        :param shell: Shell command as an array (i.e. shell=['/bin/bash'])
 
         Properties:
 
@@ -79,6 +85,22 @@ class XTerm(HtmlElement):
             "selectionChange",
             "titleChange",
         ]
+
+        if shell is not None:
+            self._terminal = Terminal(shell, self.write)
+            if self.listen is None:
+                self.listen = "['input', 'resize']"
+            else:
+                array = json.loads(self.listen)
+                if "input" not in array:
+                    array.append("input")
+                if "resize" not in array:
+                    array.append("resize")
+                self.listen = json.dumps(array)
+
+            self.resize = (self._terminal.set_size, "[]", "$event")
+            self.input = (self._terminal.input, "[$event]")
+            self.opened = self._terminal.start
 
     def fit(self):
         """Trigger a fit on the available space"""
