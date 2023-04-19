@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.3 (2023-04-19)
+### Fix
+* **ci:** Proper handling for windows ([`3247f53`](https://github.com/Kitware/trame-xterm/commit/3247f53528e12fb02fe2f029855fcdbb29223f9d))
+* **shell:** Allow full support for shell ([`797aa29`](https://github.com/Kitware/trame-xterm/commit/797aa29de0e33aa237ef476770448a9aefb23e29))
+
 ## v0.1.2 (2023-04-12)
 ### Fix
 * **api:** Add fit method ([`b41461c`](https://github.com/Kitware/trame-xterm/commit/b41461ce2d330558b27f083db027ce11e3d7c211))
