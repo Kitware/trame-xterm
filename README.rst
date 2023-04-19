@@ -9,7 +9,7 @@ License
 
 This library is distributed under the MIT License (Same as xterm.js)
 
-Examples
+Usage Examples
 -----------------------------------------------------------
 
 .. image:: examples/multi-shells/git.png
