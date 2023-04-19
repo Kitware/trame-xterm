@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2023-04-19)
+### Feature
+* **theme:** Add preset themes ([`c4c78f3`](https://github.com/Kitware/trame-xterm/commit/c4c78f3e63a9d8edc5b2a0b3af3fe88257783367))
+
 ## v0.1.3 (2023-04-19)
 ### Fix
 * **ci:** Proper handling for windows ([`3247f53`](https://github.com/Kitware/trame-xterm/commit/3247f53528e12fb02fe2f029855fcdbb29223f9d))
