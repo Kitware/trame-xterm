@@ -23,7 +23,7 @@ state.term_names = []
 def add_terminal():
     global term_idx
     term_idx += 1
-    new_name = f"Term {term_idx}"
+    new_name = f"{term_idx}: {state.next_shell.split('/').pop()}"
 
     state.term_names.append(new_name)
     state.dirty("term_names")
@@ -32,7 +32,7 @@ def add_terminal():
     with DivLayout(server, template_name=new_name) as layout:
         layout.root.style = "width: 100%; height: 100%;"
         xterm.XTerm(
-            shell=["/bin/zsh"],
+            shell=[state.next_shell],
             theme_name=("active_theme", "Floraverse"),
         )
 
@@ -54,6 +54,20 @@ with SinglePageLayout(server) as layout:
             dense=True,
             hide_details=True,
             style="max-width: 150px;",
+        )
+        vuetify.VSelect(
+            v_model=("next_shell", "/bin/zsh"),
+            items=(
+                "shells",
+                [
+                    dict(text="bash", value="/bin/bash"),
+                    dict(text="zsh", value="/bin/zsh"),
+                    dict(text="python3", value="/usr/bin/python3"),
+                ],
+            ),
+            dense=True,
+            hide_details=True,
+            style="max-width: 150px; margin-left: 10px;",
         )
 
     with layout.content:

@@ -1,3 +1,4 @@
-Example of several interactive shell which theme
+Example of several interactive shell with dynamic theme
 
-![interactive shell](./theme.png)
+![git log](./git.png)
+![python](./python.png)
