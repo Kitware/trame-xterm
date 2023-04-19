@@ -9,6 +9,18 @@ License
 
 This library is distributed under the MIT License (Same as xterm.js)
 
+Examples
+-----------------------------------------------------------
+
+.. image:: examples/multi-shells/git.png
+  :alt: Multi-shell with git log
+
+.. image:: examples/multi-shells/python.png
+  :alt: Multi-shell with python interpreter
+
+.. image:: examples/shell/htop.png
+  :alt: Interactive update with htop
+
 
 Development
 -----------------------------------------------------------
