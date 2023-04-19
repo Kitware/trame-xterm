@@ -1,5 +1,6 @@
 import "xterm/css/xterm.css";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import xtermTheme from "xterm-theme";
+import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 
@@ -26,6 +27,9 @@ export default {
     listen: {
       type: Array,
       default: () => ["input"],
+    },
+    themeName: {
+      type: String,
     },
   },
   emits: [
@@ -55,6 +59,13 @@ export default {
       fitAddon.fit();
     }
 
+    function updateTheme(name) {
+      const theme = xtermTheme[name];
+      if (term && theme) {
+        term.options.theme = theme;
+      }
+    }
+
     const sizeObserver = new ResizeObserver(fit);
     term.loadAddon(fitAddon);
 
@@ -78,6 +89,7 @@ export default {
     // Methods
     const methods = {
       fit,
+      updateTheme,
       // Skipped: open, dispose, loadAddon, +Experimental
       blur() {
         return term.blur();
@@ -161,9 +173,13 @@ export default {
 
     onMounted(() => {
       term.open(elem.value);
+      term.element.style.height = "100%";
+      updateTheme(props.themeName);
       sizeObserver.observe(elem.value);
       emit("opened");
     });
+
+    watch(() => props.themeName, updateTheme);
 
     onBeforeUnmount(() => {
       sizeObserver.unobserve(elem.value);

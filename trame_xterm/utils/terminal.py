@@ -19,11 +19,12 @@ def handle_task_result(task: asyncio.Task) -> None:
 
 
 class Terminal:
-    def __init__(self, cmd, write_fn):
+    def __init__(self, cmd, write_fn, reset_fn):
         self._cmd = cmd
         self.fd = None
         self.child_pid = None
         self.write_fn = write_fn
+        self.reset_fn = reset_fn
         self._task = None
 
     def set_size(self, cols, rows):

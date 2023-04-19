@@ -21,6 +21,7 @@
   "dependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
     "xterm": "^5.1.0",
+    "xterm-theme": "1.1.0",
     "xterm-addon-fit": "^0.7.0"
   },
   "peerDependencies": {

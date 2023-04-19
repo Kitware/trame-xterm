@@ -11,7 +11,7 @@ except ModuleNotFoundError:
     TERMINAL_AVAILABLE = False
 
 
-__ALL__ = ["XTerm", "colored"]
+__ALL__ = ["XTerm", "colored", "THEME_NAMES"]
 
 
 class HtmlElement(AbstractElement):
@@ -19,6 +19,166 @@ class HtmlElement(AbstractElement):
         super().__init__(_elem_name, children, **kwargs)
         if self.server:
             self.server.enable_module(module)
+
+
+THEME_NAMES = [
+    "Night_3024",
+    "AdventureTime",
+    "Afterglow",
+    "AlienBlood",
+    "Argonaut",
+    "Arthur",
+    "AtelierSulphurpool",
+    "Atom",
+    "Batman",
+    "Belafonte_Night",
+    "BirdsOfParadise",
+    "Blazer",
+    "Borland",
+    "Bright_Lights",
+    "Broadcast",
+    "Brogrammer",
+    "C64",
+    "Chalk",
+    "Chalkboard",
+    "Ciapre",
+    "Cobalt2",
+    "Cobalt_Neon",
+    "CrayonPonyFish",
+    "Dark_Pastel",
+    "Darkside",
+    "Desert",
+    "DimmedMonokai",
+    "DotGov",
+    "Dracula",
+    "Duotone_Dark",
+    "ENCOM",
+    "Earthsong",
+    "Elemental",
+    "Elementary",
+    "Espresso",
+    "Espresso_Libre",
+    "Fideloper",
+    "FirefoxDev",
+    "Firewatch",
+    "FishTank",
+    "Flat",
+    "Flatland",
+    "Floraverse",
+    "ForestBlue",
+    "FrontEndDelight",
+    "FunForrest",
+    "Galaxy",
+    "Github",
+    "Glacier",
+    "Grape",
+    "Grass",
+    "Gruvbox_Dark",
+    "Hardcore",
+    "Harper",
+    "Highway",
+    "Hipster_Green",
+    "Homebrew",
+    "Hurtado",
+    "Hybrid",
+    "IC_Green_PPL",
+    "IC_Orange_PPL",
+    "IR_Black",
+    "Jackie_Brown",
+    "Japanesque",
+    "Jellybeans",
+    "JetBrains_Darcula",
+    "Kibble",
+    "Later_This_Evening",
+    "Lavandula",
+    "LiquidCarbon",
+    "LiquidCarbonTransparent",
+    "LiquidCarbonTransparentInverse",
+    "Man_Page",
+    "Material",
+    "MaterialDark",
+    "Mathias",
+    "Medallion",
+    "Misterioso",
+    "Molokai",
+    "MonaLisa",
+    "Monokai_Soda",
+    "Monokai_Vivid",
+    "N0tch2k",
+    "Neopolitan",
+    "Neutron",
+    "NightLion_v1",
+    "NightLion_v2",
+    "Novel",
+    "Obsidian",
+    "Ocean",
+    "OceanicMaterial",
+    "Ollie",
+    "OneHalfDark",
+    "OneHalfLight",
+    "Pandora",
+    "Paraiso_Dark",
+    "Parasio_Dark",
+    "PaulMillr",
+    "PencilDark",
+    "PencilLight",
+    "Piatto_Light",
+    "Pnevma",
+    "Pro",
+    "Red_Alert",
+    "Red_Sands",
+    "Rippedcasts",
+    "Royal",
+    "Ryuuko",
+    "SeaShells",
+    "Seafoam_Pastel",
+    "Seti",
+    "Shaman",
+    "Slate",
+    "Smyck",
+    "SoftServer",
+    "Solarized_Darcula",
+    "Solarized_Dark",
+    "Solarized_Dark_Patched",
+    "Solarized_Dark_Higher_Contrast",
+    "Solarized_Light",
+    "SpaceGray",
+    "SpaceGray_Eighties",
+    "SpaceGray_Eighties_Dull",
+    "Spacedust",
+    "Spiderman",
+    "Spring",
+    "Square",
+    "Sundried",
+    "Symfonic",
+    "Teerb",
+    "Terminal_Basic",
+    "Thayer_Bright",
+    "The_Hulk",
+    "Tomorrow",
+    "Tomorrow_Night",
+    "Tomorrow_Night_Blue",
+    "Tomorrow_Night_Bright",
+    "Tomorrow_Night_Eighties",
+    "ToyChest",
+    "Treehouse",
+    "Ubuntu",
+    "UnderTheSea",
+    "Urple",
+    "Vaughn",
+    "VibrantInk",
+    "Violet_Dark",
+    "Violet_Light",
+    "WarmNeon",
+    "Wez",
+    "WildCherry",
+    "Wombat",
+    "Wryan",
+    "Zenburn",
+    "ayu",
+    "deep",
+    "idleToes",
+]
 
 
 # Expose your vue component(s)
@@ -37,6 +197,7 @@ class XTerm(HtmlElement):
 
         :param options: XTerm.js option which are only read at creation. (http://xtermjs.org/docs/api/terminal/interfaces/iterminaloptions/ and http://xtermjs.org/docs/api/terminal/interfaces/iterminalinitonlyoptions/)
         :param listen: Specifies the list of event you aim to listen to. [bell, binary, cursorMove, input, key, lineFeed, render, writeParsed, resize, scroll, selectionChange, titleChange]
+        :param theme_name: Name of theme to use. (See THEME_NAMES for the choices)
 
         Events:
 
@@ -74,6 +235,7 @@ class XTerm(HtmlElement):
         self._attr_names += [
             ("options", ":options"),
             ("listen", ":listen"),
+            ("theme_name", "themeName"),
         ]
         self._event_names += [
             "opened",
@@ -98,7 +260,7 @@ class XTerm(HtmlElement):
                     "The shell argument is not implemented for Windows"
                 )
 
-            self._terminal = Terminal(shell, self.write)
+            self._terminal = Terminal(shell, self.write, self.reset)
             if self.listen is None:
                 self.listen = "['input', 'resize']"
             else:
@@ -116,6 +278,10 @@ class XTerm(HtmlElement):
     def fit(self):
         """Trigger a fit on the available space"""
         self.server.js_call(self.__ref, "fit")
+
+    def use_theme(self, name):
+        """Update the theme using a name from THEME_NAMES"""
+        self.server.js_call(self.__ref, "updateTheme", name)
 
     def blur(self):
         """Trigger a blur on the xterm.js widget"""

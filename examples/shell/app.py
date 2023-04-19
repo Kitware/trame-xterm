@@ -8,8 +8,9 @@ server.client_type = "vue2"
 state, ctrl = server.state, server.controller
 
 with SinglePageLayout(server) as layout:
-    layout.title.set_text("Read-Only XTerm")
-    with layout.toolbar:
+    layout.title.set_text("Interactive XTerm")
+    with layout.toolbar as toolbar:
+        toolbar.dense = True
         vuetify.VSpacer()
         vuetify.VDivider(vertical=True)
         vuetify.VBtn("Clear", classes="mx-1", click=ctrl.clear)
