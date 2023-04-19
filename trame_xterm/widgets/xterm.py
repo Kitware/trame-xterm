@@ -1,9 +1,15 @@
 import json
 from termcolor import colored
 from trame_client.widgets.core import AbstractElement
-from ..utils.terminal import Terminal
-
 from .. import module
+
+try:
+    from ..utils.terminal import Terminal
+
+    TERMINAL_AVAILABLE = True
+except ModuleNotFoundError:
+    TERMINAL_AVAILABLE = False
+
 
 __ALL__ = ["XTerm", "colored"]
 
@@ -25,7 +31,7 @@ class XTerm(HtmlElement):
 
         Argument:
 
-        :param shell: Shell command as an array (i.e. shell=['/bin/bash'])
+        :param shell: Shell command as an array (i.e. shell=['/bin/bash']). This is not available on Windows.
 
         Properties:
 
@@ -87,6 +93,11 @@ class XTerm(HtmlElement):
         ]
 
         if shell is not None:
+            if not TERMINAL_AVAILABLE:
+                raise NotImplementedError(
+                    "The shell argument is not implemented for Windows"
+                )
+
             self._terminal = Terminal(shell, self.write)
             if self.listen is None:
                 self.listen = "['input', 'resize']"
