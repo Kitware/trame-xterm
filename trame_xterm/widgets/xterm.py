@@ -1,3 +1,6 @@
+"""XTerm Widget support both vue2 and vue3 backend.
+"""
+
 import json
 from termcolor import colored
 from trame_client.widgets.core import AbstractElement
@@ -11,7 +14,7 @@ except ModuleNotFoundError:
     TERMINAL_AVAILABLE = False
 
 
-__ALL__ = ["XTerm", "colored", "THEME_NAMES"]
+__all__ = ["XTerm", "colored", "THEME_NAMES"]
 
 
 class HtmlElement(AbstractElement):
