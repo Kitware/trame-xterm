@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2023-04-25)
+### Fix
+* **api:** Expose only meaningful classes ([`f0c488f`](https://github.com/Kitware/trame-xterm/commit/f0c488f4d3cda81bbd7ca781b7dbcf2a77a6fac2))
+
+### Documentation
+* **readme:** Try to add example images ([`7938a8a`](https://github.com/Kitware/trame-xterm/commit/7938a8a076f708aa87a50c81492aafbb517e907c))
+* **readme:** Try to add example images ([`3ee8493`](https://github.com/Kitware/trame-xterm/commit/3ee84936834b96b2b29d033b34f7d1d9c6c914cc))
+* **image:** Update image ([`c8bccc2`](https://github.com/Kitware/trame-xterm/commit/c8bccc2b43054adc699ae92eed4fb2db896f8ff8))
+* **multi-shells:** Update to have different shell types ([`d01c644`](https://github.com/Kitware/trame-xterm/commit/d01c6443e7351abdb73d5fe4c2af67d6fb2cc72d))
+* **example:** Add readme and picture ([`6fadde0`](https://github.com/Kitware/trame-xterm/commit/6fadde09e7578d8bd2b93985e25a6b85f7367dbc))
+* **example:** Add readme and picture ([`6de4e26`](https://github.com/Kitware/trame-xterm/commit/6de4e26d692b627ad60c4e565517b7a290380490))
+
 ## v0.2.0 (2023-04-19)
 ### Feature
 * **theme:** Add preset themes ([`c4c78f3`](https://github.com/Kitware/trame-xterm/commit/c4c78f3e63a9d8edc5b2a0b3af3fe88257783367))
