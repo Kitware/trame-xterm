@@ -6,7 +6,7 @@ export default defineConfig({
     lib: {
       entry: "./src/main.js",
       name: "trame_xterm",
-      format: "umd",
+      formats: ["umd"],
       fileName: "trame-xterm",
     },
     rollupOptions: {
