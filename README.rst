@@ -1,4 +1,6 @@
-trame-xterm
+.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-xterm
+
+trame-xterm |pypi_download|
 ===========================================================
 
 Trame widget to expose xterm.js. This library is compatible with both vue2 and vue3.
