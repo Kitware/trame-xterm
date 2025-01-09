@@ -41,3 +41,9 @@ Install the python library
 .. code-block:: console
 
     pip install -e .
+
+
+JavaScript dependency
+-----------------------------------------------------------
+
+This Python package bundle the ``xterm@5.1.0``, ``xterm-theme@1.1.0`` and ``xterm-addon-fit@0.7.0`` JavaScript libraries. If you would like us to upgrade it, `please reach out <https://www.kitware.com/trame/>`_.
