@@ -1,6 +1,6 @@
 [project]
 name = "trame-xterm"
-version = "0.2.1"
+version = "1.0.0"
 description = "Trame widget to expose xterm.js"
 authors = [{ name = "Kitware Inc." }]
 dependencies = [
