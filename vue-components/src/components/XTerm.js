@@ -79,7 +79,7 @@ export default {
             hasSelection: term.hasSelection() ? 1 : 0,
             selection: term.getSelection(),
             position: term.getSelectionPosition(),
-          })
+          }),
         );
       } else if (methodName) {
         term[methodName]((e) => emit(eventName, e));

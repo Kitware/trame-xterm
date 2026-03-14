@@ -1,12 +1,12 @@
-import pty
-import os
-import subprocess
-import select
-import termios
-import struct
+import asyncio
 import fcntl
 import logging
-import asyncio
+import os
+import pty
+import select
+import struct
+import subprocess
+import termios
 
 
 def handle_task_result(task: asyncio.Task) -> None:
@@ -53,7 +53,7 @@ class Terminal:
 
         (child_pid, fd) = pty.fork()
         if child_pid == 0:
-            subprocess.run(self._cmd)
+            subprocess.run(self._cmd, check=False)
         else:
             self.fd = fd
             self.child_pid = child_pid

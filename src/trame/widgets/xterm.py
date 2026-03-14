@@ -1,4 +1,4 @@
-from trame_xterm.widgets.xterm import *
+from trame_xterm.widgets.xterm import *  # noqa: F403
 
 
 def initialize(server):

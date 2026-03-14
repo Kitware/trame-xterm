@@ -17,7 +17,7 @@ export default defineConfig({
         },
       },
     },
-    outDir: "../trame_xterm/module/serve",
+    outDir: "../src/trame_xterm/module/serve",
     assetsDir: ".",
   },
 });

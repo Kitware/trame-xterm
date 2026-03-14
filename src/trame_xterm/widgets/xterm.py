@@ -1,9 +1,10 @@
-"""XTerm Widget support both vue2 and vue3 backend.
-"""
+"""XTerm Widget support both vue2 and vue3 backend."""
 
 import json
+
 from termcolor import colored
 from trame_client.widgets.core import AbstractElement
+
 from .. import module
 
 try:
@@ -14,7 +15,7 @@ except ModuleNotFoundError:
     TERMINAL_AVAILABLE = False
 
 
-__all__ = ["XTerm", "colored", "THEME_NAMES"]
+__all__ = ["THEME_NAMES", "XTerm", "colored"]
 
 
 class HtmlElement(AbstractElement):
@@ -259,9 +260,8 @@ class XTerm(HtmlElement):
 
         if shell is not None:
             if not TERMINAL_AVAILABLE:
-                raise NotImplementedError(
-                    "The shell argument is not implemented for Windows"
-                )
+                msg = "The shell argument is not implemented for Windows"
+                raise NotImplementedError(msg)
 
             self._terminal = Terminal(shell, self.write, self.reset)
             if self.listen is None:
