@@ -1,4 +1,4 @@
-.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-xterm
+.. |pypi_download| image:: https://kitware.github.io/trame/downloads/trame-xterm.svg
 
 trame-xterm |pypi_download|
 ===========================================================
